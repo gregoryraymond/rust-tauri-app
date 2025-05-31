@@ -2,5 +2,8 @@
 channel = "nightly"
 targets = ["wasm32-unknown-unknown", "x86_64-linux-android"]
 
+[build]
+target = "wasm32-unknown-unknown"
+
 [target.wasm32-unknown-unknown]
 rustflags = ['--cfg', 'getrandom_backend="wasm_js"']

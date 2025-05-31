@@ -8,7 +8,7 @@ use tauri_plugin_geolocation::{GeolocationExt, PermissionType, PositionOptions};
 use tauri_plugin_shell::process::Command;
 use tauri_plugin_shell::ShellExt;
 
-use geo::{polygon, Coord, Geometry};
+use geo::{Contains, Coord, Geometry};
 use geojson::{GeoJson, Value::Polygon};
 
 fn load_file(file: String) -> Option<geo::Polygon> {
@@ -76,6 +76,22 @@ async fn bluetooth_internal(app: AppHandle) -> anyhow::Result<()> {
     Ok(())
 }
 
+#[tauri::command]
+async fn get_current_zone(
+    position: tauri_plugin_geolocation::Position
+) -> Result<String, String> {
+    let cord = geo::coord! { x: position.coords.latitude, y: position.coords.longitude };
+    Ok(if home().contains(&cord) {
+        String::from("Home")
+    } else if work().contains(&cord) {
+        String::from("Work")
+    } else if school().contains(&cord) {
+        String::from("School")
+    } else {
+        String::from("In-Transit")
+    })
+}
+
 // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
 #[tauri::command]
 async fn get_current_position(
@@ -112,10 +128,6 @@ async fn get_position_internal(
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
-    
-    let school_geojson = String::from(include_str!("../locations/school.geojson")).parse::<GeoJson>().unwrap();
-    let work_geojson  = String::from(include_str!("../locations/work.geojson")).parse::<GeoJson>().unwrap();
-
     tauri::Builder::default()
         .plugin(tauri_plugin_fs::init())
         .plugin(tauri_plugin_geolocation::init())
@@ -125,7 +137,8 @@ pub fn run() {
         .plugin(tauri_plugin_shell::init())
         .invoke_handler(tauri::generate_handler![
             get_current_position,
-            connect_hk203
+            connect_hk203,
+            get_current_zone
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

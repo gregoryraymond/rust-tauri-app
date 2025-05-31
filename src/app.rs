@@ -1,6 +1,5 @@
 use leptos::task::spawn_local;
 use leptos::{ev::SubmitEvent, prelude::*};
-use serde::{Deserialize, Serialize};
 use tauri_ipc_macros::invoke_bindings;
 use crate::position::Position;
 use wasm_bindgen::prelude::*;
@@ -11,18 +10,25 @@ use wasm_bindgen::prelude::*;
 pub trait Commands {
     async fn get_current_position() -> Result<Position, String>;
     async fn connect_hk203() -> Result<(), String>;
+    async fn get_current_zone(p: Position) -> Result<String, String>;
 }
 
 #[component]
 pub fn App() -> impl IntoView {
     let (position, set_position) = signal(Position::default());
+    let (zone, set_zone) = signal(String::default());
 
     let refresh = move |ev: SubmitEvent| {
         ev.prevent_default();
         spawn_local(async move {
             let _ = connect_hk203().await;
-            if let Ok(post)= get_current_position().await {
-                set_position.set(post);
+        });
+        spawn_local(async move {
+            if let Ok(post) = get_current_position().await {
+                set_position.set(post.clone());
+                if let Ok(zone) = get_current_zone(post).await {
+                    set_zone.set(zone);
+                }
             }
         });
     };
@@ -45,6 +51,7 @@ pub fn App() -> impl IntoView {
                     </div>
                 }
             >
+            <p>{ move || format!("Zone: {}", zone.get()) } </p>
             <p>{ move || format!("Coords: {},{}", position.get().coords.latitude, position.get().coords.longitude) } </p>
             </ErrorBoundary>
         </main>
