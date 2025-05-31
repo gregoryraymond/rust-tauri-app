@@ -1,0 +1,6 @@
+[toolchain]
+channel = "nightly"
+targets = ["wasm32-unknown-unknown", "x86_64-linux-android"]
+
+[target.wasm32-unknown-unknown]
+rustflags = ['--cfg', 'getrandom_backend="wasm_js"']

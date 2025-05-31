@@ -13,5 +13,10 @@ Need to install pre-reqs of tauri: https://v2.tauri.app/start/prerequisites/#con
 Then:
 `cargo install trunk`
 `cargo install tauri-cli --version "^2.0.0" --locked`
+`cargo install wasm-bindgen-cli`
 
-`rustup target add wasm32-unknown-unknown`
+`rustup default nightly`
+`rustup target add wasm32-unknown-unknown aarch64-linux-android armv7-linux-androideabi i686-linux-android x86_64-linux-android`
+
+`cargo tauri add fs`
+`cargo tauri add http`

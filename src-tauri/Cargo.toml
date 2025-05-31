@@ -18,6 +18,7 @@ crate-type = ["staticlib", "cdylib", "rlib"]
 tauri-build = { version = "2", features = [] }
 
 [dependencies]
+getrandom = { version = "0.3", features = ["wasm_js"] }
 tauri = { version = "2", features = [] }
 tauri-plugin-opener = "2"
 serde = { version = "1", features = ["derive"] }
@@ -26,5 +27,7 @@ tauri-plugin-http = "2"
 tauri-plugin-geolocation = "2"
 anyhow = "1.0.98"
 tauri-plugin-blec = "0.5.3"
-tauri-plugin-shell = "2.2.1"
-
+tauri-plugin-shell = "2"
+tauri-plugin-fs = "2"
+geo = "0.30.0"
+geojson = "0.24.2"

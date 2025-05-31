@@ -11,6 +11,12 @@
     "core:resources:default",
     "http:default",
     "geolocation:default",
-    "blec:default"
+    "blec:default",
+    "http:default",
+    "fs:default",
+    "opener:default",
+    "geolocation:default",
+    "blec:default",
+    "shell:default"
   ]
 }
