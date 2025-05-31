@@ -1,4 +1,4 @@
-/src/main/java/com/test_tari_app/app/generated
+/src/main/java/com/test_tauri_app/app/generated
 /src/main/jniLibs/**/*.so
 /src/main/assets/tauri.conf.json
 /tauri.build.gradle.kts

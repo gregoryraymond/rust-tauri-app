@@ -1,3 +1,3 @@
-package com.test_tari_app.app
+package com.test_tauri_app.app
 
 class MainActivity : TauriActivity()
