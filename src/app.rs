@@ -20,11 +20,15 @@ pub fn App() -> impl IntoView {
 
     let refresh = move |ev: SubmitEvent| {
         ev.prevent_default();
+        // spawn_local(async move {
+        //     let _ = connect_hk203().await;
+        // });
         spawn_local(async move {
-            let _ = connect_hk203().await;
-        });
-        spawn_local(async move {
-            if let Ok(post) = get_current_position().await {
+            let array = js_sys::Array::of2(&JsValue::from_str("location"), &JsValue::from_str("coarseLocation"));
+            let _res = invoke(&"plugin:geolocation|request_permissions", array.into()).await;
+            let pos = get_current_position().await; 
+            leptos::logging::log!("Position {:#?}", pos);
+            if let Ok(post) = pos {
                 set_position.set(post.clone());
                 if let Ok(zone) = get_current_zone(post).await {
                     set_zone.set(zone);

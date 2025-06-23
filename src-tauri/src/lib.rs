@@ -106,19 +106,6 @@ async fn get_position_internal(
     window: Window,
 ) -> anyhow::Result<tauri_plugin_geolocation::Position> {
     let location = window.geolocation();
-    let mut perm = location.check_permissions()?;
-    loop {
-        perm = match perm.location {
-            PermissionState::Granted => break,
-            PermissionState::Denied => continue,
-            PermissionState::Prompt => {
-                location.request_permissions(Some(vec![PermissionType::Location]))?
-            }
-            PermissionState::PromptWithRationale => {
-                location.request_permissions(Some(vec![PermissionType::Location]))?
-            }
-        };
-    }
     Ok(location.get_current_position(Some(PositionOptions {
         enable_high_accuracy: true,
         timeout: 10000,

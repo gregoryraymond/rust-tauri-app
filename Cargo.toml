@@ -9,6 +9,7 @@ getrandom = { version = "0.3", features = ["wasm_js"] }
 leptos = { version = "0.8.2", features = ["csr"] }
 leptos_meta = "*"
 leptos_router = "*"
+js-sys = "0.3"
 wasm-bindgen = "0.2"
 wasm-bindgen-futures = "0.4"
 serde = { version = "1", features = ["derive"] }
