@@ -16,10 +16,6 @@ jobs:
     steps:
         - uses: actions/checkout@v4
 
-        - uses: pnpm/action-setup@v4
-          with:
-              version: 8
-
         - name: Setup Java
           uses: actions/setup-java@v4
           with:
@@ -43,10 +39,10 @@ jobs:
               targets: aarch64-linux-android,armv7-linux-androideabi,i686-linux-android,x86_64-linux-android
 
         - name: Install dependencies
-          run: pnpm install
+          run: cargo install
 
         - name: Build app bundle
-          run: pnpm tauri android build -v
+          run: cargo tauri android build -v
           env:
               NDK_HOME: ${{ env.ANDROID_HOME }}/ndk/27.0.11902837
 
