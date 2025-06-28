@@ -60,7 +60,6 @@ jobs:
 
         - name: Build app bundle
           run: |
-              npx tailwindcss -i ./input.css -o ./style/output.css
               cargo tauri android build -v --aab
           env:
               NDK_HOME: ${{ env.ANDROID_HOME }}/ndk/27.0.11902837
@@ -69,6 +68,15 @@ jobs:
           run: |
               echo "${{ secrets.ANDROID_RELEASE_KEYSTORE }}" > src-tauri/gen/android/release.jks.base64
               base64 -d src-tauri/gen/android/release.jks.base64 > src-tauri/gen/android/release.decrypted.jks
+
+        - name: Extract some locs
+          run: |
+              echo "${{ secrets.HOME }}" > src-tauri/locations/home.geojson.base64
+              base64 -d src-tauri/locations/home.geojson.base64 > src-tauri/locations/home.geojson
+              echo "${{ secrets.WORK }}" > src-tauri/locations/work.geojson.base64
+              base64 -d src-tauri/locations/work.geojson.base64 > src-tauri/locations/work.geojson
+              echo "${{ secrets.SCHOOL }}" > src-tauri/locations/school.geojson.base64
+              base64 -d src-tauri/locations/school.geojson.base64 > src-tauri/locations/school.geojson
 
         - name: Sign APK
           run: |
