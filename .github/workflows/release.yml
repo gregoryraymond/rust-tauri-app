@@ -54,6 +54,7 @@ jobs:
                 librsvg2-dev
               cargo install cargo-binstall
               cargo binstall trunk tauri-cli
+              npm install tailwindcss @tailwindcss/cli
               cargo build
 
         - name: Build app bundle
