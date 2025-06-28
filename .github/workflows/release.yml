@@ -38,7 +38,7 @@ jobs:
         - name: install Rust nightly
           uses: dtolnay/rust-toolchain@nightly
           with:
-              targets: aarch64-linux-android,armv7-linux-androideabi,i686-linux-android,x86_64-linux-android
+              targets: aarch64-linux-android,armv7-linux-androideabi,i686-linux-android,x86_64-linux-android,wasm32-unknown-unknown
 
         - name: Install dependencies
           run: |
@@ -53,12 +53,15 @@ jobs:
                 libayatana-appindicator3-dev \
                 librsvg2-dev
               cargo install cargo-binstall
-              cargo binstall -y trunk tauri-cli
-              npm install tailwindcss @tailwindcss/cli
+              cargo binstall -y trunk tauri-cli cargo-generate wasm-bindgen-cli
+              npm install -g sass
+              npm install -g tailwindcss @tailwindcss/cli
               npx update-browserslist-db@latest
 
         - name: Build app bundle
-          run: cargo tauri android build -v --aab
+          run: |
+              npx tailwindcss -i ./input.css -o ./style/output.css
+              cargo tauri android build -v --aab
           env:
               NDK_HOME: ${{ env.ANDROID_HOME }}/ndk/27.0.11902837
 
