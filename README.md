@@ -1,6 +1,18 @@
-# Tauri + Leptos
+# Tauri + Leptos + Tailwindcss
+ 
+Tauri + Leptos + Tailwindcss compiling for android app.
 
-This template should help get you started developing with Tauri and Leptos.
+The attempt of this project is to create an app that automates certain aspects of my commute.
+
+Namely, is able to:
+
+* Connect to bluetooth when the journey begins.
+* Autoplay my podcast once connected to bluetooth.
+* Autonavigate based on a tiny amount of input.
+* Turn on wifi when the journey ends and disable bluetooth.
+* Lock my doggy door remotely as I arrive home.
+
+Some of this is necessary because of some of the restrictions I have placed on my mobile device.
 
 ## Recommended IDE Setup
 
