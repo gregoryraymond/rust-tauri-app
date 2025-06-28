@@ -41,10 +41,23 @@ jobs:
               targets: aarch64-linux-android,armv7-linux-androideabi,i686-linux-android,x86_64-linux-android
 
         - name: Install dependencies
-          run: cargo build
+          run: |
+              sudo apt-get update
+              sudo apt-get install libwebkit2gtk-4.1-dev \
+                build-essential \
+                curl \
+                wget \
+                file \
+                libxdo-dev \
+                libssl-dev \
+                libayatana-appindicator3-dev \
+                librsvg2-dev
+              cargo install cargo-binstall
+              cargo binstall trunk tauri-cli
+              cargo build
 
         - name: Build app bundle
-          run: cargo install tauri-cli --version "^2.0.0" --locked && cargo tauri android build -v --aab
+          run: cargo tauri android build -v --aab
           env:
               NDK_HOME: ${{ env.ANDROID_HOME }}/ndk/27.0.11902837
 
