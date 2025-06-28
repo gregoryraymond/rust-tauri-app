@@ -56,7 +56,7 @@ jobs:
               cargo install cargo-binstall
               cargo binstall -y trunk tauri-cli cargo-generate wasm-bindgen-cli cargo-leptos
               npm install -g sass
-              npm install tailwindcss @tailwindcss/cli
+              npm install tailwindcss@4.1 @tailwindcss/cli@4.1
 
         - name: Build app bundle
           run: |
