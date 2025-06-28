@@ -44,7 +44,7 @@ jobs:
           run: cargo build
 
         - name: Build app bundle
-          run: cargo tauri android build -v --aab
+          run: cargo install tauri-cli --version "^2.0.0" --locked && cargo tauri android build -v --aab
           env:
               NDK_HOME: ${{ env.ANDROID_HOME }}/ndk/27.0.11902837
 
