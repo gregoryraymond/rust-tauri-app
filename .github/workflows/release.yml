@@ -53,9 +53,9 @@ jobs:
                 libayatana-appindicator3-dev \
                 librsvg2-dev
               cargo install cargo-binstall
-              cargo binstall trunk tauri-cli
+              cargo binstall -y trunk tauri-cli
               npm install tailwindcss @tailwindcss/cli
-              cargo build
+              npx update-browserslist-db@latest
 
         - name: Build app bundle
           run: cargo tauri android build -v --aab
