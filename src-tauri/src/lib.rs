@@ -120,8 +120,8 @@ pub fn run() {
         .plugin(tauri_plugin_geolocation::init())
         .plugin(tauri_plugin_http::init())
         .plugin(tauri_plugin_opener::init())
-        .plugin(tauri_plugin_blec::init())
         .plugin(tauri_plugin_shell::init())
+        .plugin(tauri_plugin_blec::init())
         .invoke_handler(tauri::generate_handler![
             get_current_position,
             connect_hk203,

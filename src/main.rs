@@ -1,14 +1,12 @@
 mod app;
 mod position;
+mod employee_list;
 
 use app::*;
-use leptos::prelude::*;
+use leptos::{logging, mount};
 
 fn main() {
     console_error_panic_hook::set_once();
-    mount_to_body(|| {
-        view! {
-            <App/>
-        }
-    })
+    logging::log!("csr mode - mounting to body");
+    mount::mount_to_body(App);
 }

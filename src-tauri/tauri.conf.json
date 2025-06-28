@@ -15,7 +15,8 @@
       {
         "title": "test-tauri-app",
         "width": 800,
-        "height": 600
+        "height": 600,
+        "decorations": false
       }
     ],
     "security": {
@@ -23,6 +24,9 @@
     }
   },
   "bundle": {
+    "android": {
+      "versionCode": 101
+    },
     "active": true,
     "targets": "all",
     "icon": [
