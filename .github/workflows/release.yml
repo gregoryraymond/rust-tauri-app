@@ -70,14 +70,14 @@ jobs:
 
         - name: Rename APK file
           run: |
-              mv ./src-tauri/gen/android/app/build/outputs/bundle/universalRelease/app-universal-release.aab ./src-tauri/gen/android/app/build/outputs/bundle/universalRelease/rust-tauri-app-${{ steps.package-version.outputs.current-version}}.apk
+              mv ./src-tauri/gen/android/app/build/outputs/bundle/universalRelease/app-universal-release.aab ./src-tauri/gen/android/app/build/outputs/bundle/universalRelease/rust-tauri-app-${{ env.VERSION }}.apk
 
         - name: Publish
           uses: softprops/action-gh-release@v1
           with:
               draft: true
-              name: App v${{VERSION}}
-              tag_name: v${{VERSION}}
+              name: App v${{ env.VERSION }}
+              tag_name: v${{ env.VERSION }}
               generate_release_notes: true
               files: |
-                  ./src-tauri/gen/android/app/build/outputs/bundle/universalRelease/rust-tauri-app-${{ steps.package-version.outputs.current-version}}.apk
+                  ./src-tauri/gen/android/app/build/outputs/bundle/universalRelease/rust-tauri-app-${{ env.VERSION }}.apk
