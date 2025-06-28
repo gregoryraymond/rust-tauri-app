@@ -55,7 +55,8 @@ jobs:
               rustup default nightly
               cargo install cargo-binstall
               cargo binstall -y trunk tauri-cli cargo-generate wasm-bindgen-cli cargo-leptos
-              npm install -g sass tailwindcss @tailwindcss/cli
+              npm install -g sass
+              npm install tailwindcss @tailwindcss/cli
 
         - name: Build app bundle
           run: |
