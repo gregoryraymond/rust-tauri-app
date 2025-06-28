@@ -54,9 +54,7 @@ jobs:
                 librsvg2-dev
               cargo install cargo-binstall
               cargo binstall -y trunk tauri-cli cargo-generate wasm-bindgen-cli
-              npm install -g sass
-              npm install -g tailwindcss @tailwindcss/cli
-              npx update-browserslist-db@latest
+              npm install -g sass tailwindcss @tailwindcss/cli
 
         - name: Build app bundle
           run: |
