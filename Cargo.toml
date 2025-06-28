@@ -23,8 +23,5 @@ gloo-net = { version = "0.6.0", features = ["http"] }
 members = ["src-tauri"]
 
 [package.metadata.leptos]
-index_file = "index.html"
-assets_dir = "public"
-
-[package.metadata.leptos.style]
-file = "style/output.css"
+name = "rust-tauri-app"
+tailwind-input-file = "src/input.css"

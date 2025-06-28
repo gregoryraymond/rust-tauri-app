@@ -7,11 +7,3 @@ ignore = ["./src-tauri"]
 [serve]
 port = 1420
 open = false
-
-[[hooks]]
-stage = "build"
-command = "sh"
-command_arguments = [
-    "-c",
-    "tailwindcss -i ./input.css -o $TRUNK_STAGING_DIR/tailwind.css --minify || npx @tailwindcss/cli -i ./input.css -o $TRUNK_STAGING_DIR/tailwind.css --minify",
-]
