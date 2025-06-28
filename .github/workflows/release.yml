@@ -15,7 +15,8 @@ jobs:
         contents: write
     steps:
         - uses: actions/checkout@v4
-        - uses: textbook/git-checkout-submodule-action@master
+          with:
+            submodules: 'true'
 
         - name: Setup Java
           uses: actions/setup-java@v4

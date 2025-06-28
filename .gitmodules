@@ -1,0 +1,3 @@
+[submodule "src-tauri/vendor/tauri-plugin-blec"]
+	path = src-tauri/vendor/tauri-plugin-blec
+	url = git@github.com:gregoryraymond/tauri-plugin-blec.git
