@@ -60,8 +60,10 @@ jobs:
           run: |
               cargo binstall -y trunk tauri-cli cargo-generate wasm-bindgen-cli cargo-leptos
               npm install -g sass
-              npm install tailwindcss@4.1 @tailwindcss/cli@4.1
-
+              curl -sLO https://github.com/tailwindlabs/tailwindcss/releases/download/v4.1.11/tailwindcss-linux-x64 
+              chmod +x tailwindcss-linux-x64
+              mv tailwindcss-linux-x64 tailwindcss
+  
         - name: Build app bundle
           run: |
               cargo tauri android build -v --aab
