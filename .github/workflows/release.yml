@@ -67,7 +67,7 @@ jobs:
               base64 -d src-tauri/gen/android/release.jks.base64 > src-tauri/gen/android/release.decrypted.jks
               echo "password=${{ secrets.ANDROID_RELEASE_PASSWORD }}" > src-tauri/gen/android/keystore.properties
               echo "keyAlias=${{ secrets.ANDROID_RELEASE_KEY }}" >> src-tauri/gen/android/keystore.properties
-              echo "storeFile=src-tauri/gen/android/release.decrypted.jks" >> src-tauri/gen/android/keystore.properties
+              echo "storeFile=release.decrypted.jks" >> src-tauri/gen/android/keystore.properties
 
         - name: Extract some locs
           run: |
