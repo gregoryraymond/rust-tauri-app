@@ -56,19 +56,10 @@ jobs:
         
         - uses: cargo-bins/cargo-binstall@main
 
-        - name: Install tailwind
+        - name: Install trunk + others
           run: |
               cargo binstall -y trunk tauri-cli cargo-generate wasm-bindgen-cli cargo-leptos
               npm install -g sass
-              curl -sLO https://github.com/tailwindlabs/tailwindcss/releases/download/v4.1.11/tailwindcss-linux-x64 
-              chmod +x tailwindcss-linux-x64
-              mv tailwindcss-linux-x64 tailwindcss
-  
-        - name: Build app bundle
-          run: |
-              cargo tauri android build -v --aab
-          env:
-              NDK_HOME: ${{ env.ANDROID_HOME }}/ndk/27.0.11902837
 
         - name: Extract android signing key from env
           run: |
@@ -83,6 +74,12 @@ jobs:
               base64 -d src-tauri/locations/work.geojson.base64 > src-tauri/locations/work.geojson
               echo "${{ secrets.SCHOOL }}" > src-tauri/locations/school.geojson.base64
               base64 -d src-tauri/locations/school.geojson.base64 > src-tauri/locations/school.geojson
+
+        - name: Build app bundle
+          run: |
+              cargo tauri android build -v --aab
+          env:
+              NDK_HOME: ${{ env.ANDROID_HOME }}/ndk/27.0.11902837
 
         - name: Sign APK
           run: |
